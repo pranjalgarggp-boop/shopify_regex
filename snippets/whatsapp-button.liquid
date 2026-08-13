@@ -1,11 +1,25 @@
-<!-- Floating WhatsApp Button & Pill -->
+<style>
+  @keyframes shake-gentle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    15% { transform: rotate(-8deg) scale(1.05); }
+    30% { transform: rotate(8deg) scale(1.05); }
+    45% { transform: rotate(-5deg) scale(1.05); }
+    60% { transform: rotate(5deg) scale(1.05); }
+    75% { transform: rotate(0deg) scale(1); }
+  }
+  .animate-shake-badge {
+    animation: shake-gentle 3s infinite ease-in-out;
+  }
+</style>
+
+<!-- Floating WhatsApp Button & Shaking Pill -->
 <div class="fixed bottom-5 right-4 z-40 flex flex-col items-end gap-2 pointer-events-none">
   <!-- Floating Shaking "Chat with us 👋" Pill -->
   <a
     href="https://wa.me/918360053594?text=Hello%20Regex%20Remedies%2C%20I%20have%20a%20query"
     target="_blank"
     rel="noreferrer"
-    class="pointer-events-auto bg-[#111315]/95 backdrop-blur-md text-white px-3 py-1.5 rounded-full font-mono text-[11px] font-bold shadow-xl border border-[#25D366] flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
+    class="pointer-events-auto animate-shake-badge bg-[#111315]/95 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full font-mono text-[11px] font-bold shadow-2xl border border-[#25D366] flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
   >
     <span class="relative flex h-2 w-2">
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
