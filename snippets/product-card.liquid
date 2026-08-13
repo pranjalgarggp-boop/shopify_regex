@@ -1,44 +1,61 @@
-<a href="{{ product.url }}" class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-xs transition-all hover:-translate-y-1 hover:shadow-md border border-gray-100 hover:border-[#c44900]">
-  <!-- Image -->
-  <div class="relative aspect-square overflow-hidden bg-[#faf9f5]">
+<a href="{{ product.url }}" class="group relative flex flex-col w-full h-full bg-white border border-gray-200 hover:border-[#c44900] rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all duration-300">
+  <!-- Top Badges -->
+  <div class="flex items-center justify-between gap-2 mb-3">
+    <span class="font-deva text-xs sm:text-sm font-bold text-[#c44900] px-3 py-0.5 rounded-full bg-[#faf7f1] border border-gray-200">
+      आयुर्वेद
+    </span>
+    <span class="font-mono text-[10px] sm:text-xs text-gray-500 font-bold uppercase">
+      HERBAL FORMULA
+    </span>
+  </div>
+
+  <!-- Product Bottle Box (object-contain so bottle is never cropped) -->
+  <div class="relative flex aspect-[4/3] min-h-[190px] sm:min-h-[220px] w-full items-center justify-center overflow-hidden rounded-xl mb-4 bg-white border border-gray-100 p-3 transition-transform duration-300 group-hover:scale-[1.02]">
     {% if product.featured_image %}
       <img
         src="{{ product.featured_image | img_url: '600x' }}"
         alt="{{ product.title }}"
-        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        class="max-h-full max-w-full h-auto w-auto object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
         loading="lazy"
       />
     {% else %}
-      {{ 'product-1' | placeholder_svg_tag: 'h-full w-full bg-gray-200' }}
+      <img
+        src="{{ 'product-shilajit.jpg' | asset_url }}"
+        alt="{{ product.title }}"
+        class="max-h-full max-w-full h-auto w-auto object-contain drop-shadow-md"
+      />
     {% endif %}
-    
-    <!-- Care Level Badge -->
-    <div class="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold tracking-widest text-[#111315] shadow-xs backdrop-blur-md">
-      <span class="flex h-1.5 w-1.5 rounded-full bg-[#c44900]"></span>
-      TARGETED CARE
-    </div>
+
+    <span class="absolute bottom-2 left-2 right-2 backdrop-blur-md bg-white/95 border border-gray-200 rounded-lg px-2 py-1 text-[10px] font-mono text-emerald-800 flex items-center justify-center gap-1 shadow-xs font-bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      <span>AYUSH LICENSED FORMULA</span>
+    </span>
   </div>
 
-  <!-- Content -->
-  <div class="flex flex-1 flex-col p-4 sm:p-5">
-    <div class="flex flex-col gap-1 mb-2">
-      <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#111315] leading-tight">
-        {{ product.title }}
-      </h3>
-      <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">
-        {{ product.description | strip_html | truncatewords: 15 }}
-      </p>
-    </div>
+  <!-- Title & Description -->
+  <div class="flex flex-col gap-1 mb-3">
+    <h3 class="font-serif text-lg sm:text-xl font-bold text-[#111315] group-hover:text-[#c44900] transition-colors leading-tight">
+      {{ product.title }}
+    </h3>
+    <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed font-sans">
+      {% if product.description != blank %}
+        {{ product.description | strip_html | truncatewords: 12 }}
+      {% else %}
+        Classical high-potency Ayurvedic extract for metabolic vitality.
+      {% endif %}
+    </p>
+  </div>
 
-    <!-- Rating -->
-    <div class="mt-auto pt-4 flex items-center justify-between">
-      <div class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#c44900" stroke="#c44900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span class="text-xs font-bold text-gray-700">4.9</span>
-      </div>
-      
-      <span class="font-bold text-[#c44900] bg-[#c44900]/10 px-2 py-0.5 rounded text-sm">
-        {{ product.price | money }}
+  <!-- Rating & Price Box -->
+  <div class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
+    <div class="flex items-center gap-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#c44900" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span class="text-xs font-bold text-gray-800">4.9</span>
+    </div>
+    
+    <div class="font-mono text-right">
+      <span class="font-sans text-base font-bold text-[#111315]">
+        {% if product.price > 0 %}{{ product.price | money }}{% else %}₹1,499{% endif %}
       </span>
     </div>
   </div>

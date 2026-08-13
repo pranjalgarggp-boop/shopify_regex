@@ -1,6 +1,6 @@
-<div class="mx-auto max-w-7xl px-5 lg:px-8 pt-4 sm:pt-6 text-left">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-2 sm:pt-6 text-left">
   <!-- Breadcrumbs -->
-  <nav aria-label="Breadcrumb" class="text-xs font-mono text-gray-500 mb-4">
+  <nav aria-label="Breadcrumb" class="text-xs font-mono text-gray-500 mb-3">
     <ol class="flex flex-wrap items-center gap-1.5">
       <li>
         <a href="{{ routes.all_products_collection_url }}" class="hover:text-[#c44900]">Remedies</a>
@@ -18,42 +18,41 @@
     </ol>
   </nav>
 
-  <!-- ── Buy Block (Premium Editorial Layout) ─────────────────────────── -->
-  <div class="grid gap-10 lg:gap-16 lg:grid-cols-12 items-start">
+  <!-- ── Buy Block (Premium Editorial Mobile-Optimized Layout) ─────────────────────────── -->
+  <div class="grid gap-6 lg:gap-16 lg:grid-cols-12 items-start">
     
-    <!-- Gallery -->
+    <!-- Gallery Box (object-contain so bottle is centered & never cropped) -->
     <div class="lg:col-span-6 w-full">
-      <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#faf7f1] border border-gray-100 mb-4">
+      <div class="relative w-full aspect-square max-h-[360px] sm:max-h-none rounded-2xl overflow-hidden bg-[#faf7f1] border border-gray-200/80 p-4 flex items-center justify-center mb-3">
         {% if product.featured_image %}
           <img 
             src="{{ product.featured_image | img_url: 'master' }}" 
             alt="{{ product.featured_image.alt | escape }}" 
-            class="w-full h-full object-cover"
+            class="max-h-full max-w-full h-auto w-auto object-contain drop-shadow-md"
             id="MainProductImage"
           >
         {% else %}
-          <!-- Default Fallback Product Image if Shopify product has no image -->
           <img 
             src="{{ 'product-shilajit.jpg' | asset_url }}" 
             alt="{{ product.title }}" 
-            class="w-full h-full object-cover"
+            class="max-h-full max-w-full h-auto w-auto object-contain drop-shadow-md"
             id="MainProductImage"
           >
         {% endif %}
         
         <!-- Targeted Care Badge -->
-        <div class="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-[10px] sm:text-xs font-bold tracking-widest text-[#111315] shadow-sm backdrop-blur-md">
+        <div class="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[10px] sm:text-xs font-bold tracking-widest text-[#111315] shadow-xs backdrop-blur-md">
           <span class="flex h-1.5 w-1.5 rounded-full bg-[#c44900]"></span>
           TARGETED CARE
         </div>
       </div>
       
-      <!-- Gallery Thumbnails -->
+      <!-- Gallery Thumbnails (Max 4 thumbnails for mobile optimization) -->
       {% if product.images.size > 1 %}
-        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
-          {% for image in product.images %}
-            <button class="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 focus:outline-none focus:border-[#c44900] {% if forloop.first %}border-[#c44900]{% else %}border-transparent{% endif %}" onclick="document.getElementById('MainProductImage').src = '{{ image | img_url: 'master' }}';">
-              <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" class="w-full h-full object-cover">
+        <div class="flex gap-2.5 overflow-x-auto no-scrollbar pb-1">
+          {% for image in product.images limit: 4 %}
+            <button class="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 focus:outline-none focus:border-[#c44900] bg-[#faf7f1] p-1 {% if forloop.first %}border-[#c44900]{% else %}border-transparent{% endif %}" onclick="document.getElementById('MainProductImage').src = '{{ image | img_url: 'master' }}';">
+              <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" class="w-full h-full object-contain">
             </button>
           {% endfor %}
         </div>
@@ -61,63 +60,63 @@
     </div>
 
     <!-- Product Details -->
-    <div class="lg:col-span-6 space-y-6 lg:pt-4">
+    <div class="lg:col-span-6 space-y-5 lg:pt-2">
       <div>
-        <div class="flex items-center justify-between gap-2 mb-4">
+        <div class="flex items-center justify-between gap-2 mb-3">
           <span class="font-mono text-xs text-[#c44900] font-bold uppercase tracking-widest">
             Digestive Health & Metabolism
           </span>
-          <span class="font-deva text-base font-bold text-[#c44900] px-3 py-0.5 rounded-full border border-gray-200">
+          <span class="font-deva text-xs sm:text-sm font-bold text-[#c44900] px-3 py-0.5 rounded-full bg-[#faf7f1] border border-gray-200">
             आयुर्वेद
           </span>
         </div>
 
-        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-[#111315] leading-[1.1]">{{ product.title }}</h1>
-        <p class="text-base sm:text-lg text-gray-600 font-sans mt-3">
+        <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111315] leading-tight">{{ product.title }}</h1>
+        <p class="text-sm sm:text-base text-gray-600 font-sans mt-2">
           Classical High-Potency Ayurvedic Extract · Standardized Actives
         </p>
       </div>
 
       <!-- Rating & Badges -->
-      <div class="flex flex-wrap items-center gap-3 border-y border-gray-100 py-4">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 border-y border-gray-100 py-3">
         <div class="flex items-center gap-1 text-[#c44900]">
           {% for i in (1..5) %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           {% endfor %}
-          <span class="text-sm font-bold ml-1 text-[#111315]">4.9 (124 Reviews)</span>
+          <span class="text-xs font-bold ml-1 text-[#111315]">4.9 (124 Reviews)</span>
         </div>
         <span class="text-gray-300">•</span>
-        <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-bold text-blue-700 ring-1 ring-inset ring-blue-700/10">
+        <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-0.5 text-[11px] font-bold text-blue-700">
           General Wellness
         </span>
         <span class="text-gray-300">•</span>
-        <span class="text-xs font-mono font-bold text-gray-600 uppercase">≈ 30 Days Pack</span>
+        <span class="text-[11px] font-mono font-bold text-gray-600 uppercase">≈ 30 Days Pack</span>
       </div>
 
       <!-- Price Box & Add To Cart -->
-      <div class="pt-2">
-        <div class="flex items-baseline gap-4 mb-2">
-          <span class="font-sans text-3xl font-medium text-[#111315]">
+      <div>
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="font-sans text-2xl sm:text-3xl font-bold text-[#111315]">
             {% if product.price > 0 %}{{ product.price | money }}{% else %}₹1,499{% endif %}
           </span>
           {% if product.compare_at_price > product.price %}
-            <span class="font-sans text-lg text-gray-400 line-through">
+            <span class="font-sans text-base text-gray-400 line-through">
               {{ product.compare_at_price | money }}
             </span>
           {% else %}
-            <span class="font-sans text-lg text-gray-400 line-through">₹1,999</span>
+            <span class="font-sans text-base text-gray-400 line-through">₹1,999</span>
           {% endif %}
         </div>
-        <p class="text-sm text-gray-500 font-sans mb-6">
+        <p class="text-xs text-gray-500 font-sans mb-4">
           Pack of 60 capsules · Inclusive of all taxes
         </p>
 
-        <div class="mt-4">
+        <div>
           {% form 'product', product %}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
             
-            <div class="flex flex-col sm:flex-row gap-4 mb-4">
-              <div class="flex h-[3.25rem] w-full sm:w-32 items-center justify-between rounded bg-white border border-gray-300 px-4">
+            <div class="flex flex-col sm:flex-row gap-3 mb-3">
+              <div class="flex h-12 w-full sm:w-32 items-center justify-between rounded bg-white border border-gray-300 px-4">
                 <button type="button" class="text-gray-500 hover:text-black font-bold text-lg" onclick="this.nextElementSibling.stepDown()">-</button>
                 <input type="number" name="quantity" value="1" min="1" class="w-12 text-center text-sm font-bold bg-transparent border-none outline-none appearance-none" />
                 <button type="button" class="text-gray-500 hover:text-black font-bold text-lg" onclick="this.previousElementSibling.stepUp()">+</button>
@@ -125,7 +124,7 @@
               <button
                 type="submit"
                 name="add"
-                class="flex h-[3.25rem] flex-1 items-center justify-center rounded bg-[#111315] px-8 text-sm font-bold text-white transition-colors hover:bg-[#c44900] shadow-md shadow-[#111315]/20"
+                class="flex h-12 flex-1 items-center justify-center rounded bg-[#111315] px-6 text-sm font-bold text-white transition-colors hover:bg-[#c44900] shadow-md"
               >
                 Add to Cart
               </button>
@@ -135,13 +134,13 @@
       </div>
 
       <!-- Trust Badges -->
-      <div class="space-y-3 text-xs font-mono text-gray-500 pt-6 border-t border-gray-100">
+      <div class="space-y-2 text-xs font-mono text-gray-500 pt-4 border-t border-gray-100">
         <p class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315]"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315] shrink-0"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
           <span>Dispatched within 24 hours. Express Delivery 2-4 Days.</span>
         </p>
         <p class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315] shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
           <span>AYUSH Licensed & Schedule T Certified Manufacturing</span>
         </p>
       </div>
@@ -149,26 +148,26 @@
   </div>
 </div>
 
-<!-- ── Sticky Section Navigation Bar ─────────────────────────────────── -->
-<nav aria-label="Sections of this page" class="sticky top-[72px] sm:top-[88px] z-30 mt-12 border-y border-gray-200 bg-white/95 backdrop-blur-md">
-  <div class="mx-auto max-w-7xl px-5 lg:px-8 flex gap-8 overflow-x-auto py-3 no-scrollbar text-xs sm:text-sm font-bold">
+<!-- ── Sticky Section Navigation Bar (Mobile Optimized) ─────────────────────────────────── -->
+<nav aria-label="Sections of this page" class="sticky top-[56px] sm:top-[88px] z-30 mt-8 border-y border-gray-200 bg-white/95 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex gap-6 overflow-x-auto py-2.5 no-scrollbar text-xs sm:text-sm font-bold">
     <a href="#overview" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Overview</a>
     <a href="#composition" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Composition</a>
     <a href="#how-to-take" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Dosage & Usage</a>
-    <a href="#safety" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Safety & Guidance</a>
+    <a href="#safety" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Safety</a>
     <a href="#reviews" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Reviews</a>
     <a href="#questions" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">FAQs</a>
   </div>
 </nav>
 
 <!-- ── Page Content Sections ─────────────────────────────────────────── -->
-<div class="mx-auto max-w-7xl px-5 lg:px-8 text-left space-y-16 py-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-left space-y-12 py-8 sm:py-12">
   
   <!-- 1. OVERVIEW SECTION -->
-  <section id="overview" class="scroll-mt-32">
-    <div class="max-w-2xl mb-6">
+  <section id="overview" class="scroll-mt-24">
+    <div class="max-w-2xl mb-4">
       <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Overview</p>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-2">
+      <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">
         {% if product.description != blank %}
           {{ product.description | strip_html | truncatewords: 20 }}
         {% else %}
@@ -177,94 +176,92 @@
       </h2>
     </div>
 
-    <!-- 3 Key Benefits Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
         <h3 class="font-serif text-base font-bold text-[#111315]">Enhanced Metabolic Absorption</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-2">Promotes optimal enzymatic secretion and nutrient breakdown for sustained cellular energy throughout the day.</p>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Promotes optimal enzymatic secretion and nutrient breakdown for sustained cellular energy.</p>
       </div>
-      <div class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200">
+      <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
         <h3 class="font-serif text-base font-bold text-[#111315]">Gastrointestinal Soothing</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-2">Reduces acidity, bloating, and post-meal sluggishness using concentrated botanical carminatives.</p>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Reduces acidity, bloating, and post-meal sluggishness using concentrated botanical carminatives.</p>
       </div>
-      <div class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200">
+      <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
         <h3 class="font-serif text-base font-bold text-[#111315]">Gut Microbiome Support</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-2">Nurtures beneficial intestinal flora to reinforce the gut-lining barrier and long-term digestive vitality.</p>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Nurtures beneficial intestinal flora to reinforce the gut-lining barrier and digestive vitality.</p>
       </div>
     </div>
   </section>
 
   <!-- 2. COMPOSITION TABLE SECTION -->
-  <section id="composition" class="scroll-mt-32">
-    <div class="mb-4">
+  <section id="composition" class="scroll-mt-24">
+    <div class="mb-3">
       <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Formulation Breakdown</p>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-1">Active Botanical Formula</h2>
+      <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">Active Botanical Formula</h2>
     </div>
 
-    <div class="bg-white rounded-xl border border-gray-200 p-5 sm:p-6 shadow-xs">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 pb-3 mb-4">
-        <h3 class="font-serif text-lg font-bold text-[#111315]">Full Botanical Extract · {{ product.title }}</h3>
-        <span class="font-mono text-xs uppercase font-bold text-[#c44900] bg-[#faf7f1] px-3 py-1 rounded-full border border-gray-200">
+    <div class="bg-white rounded-xl border border-gray-200 p-4 sm:p-5 shadow-xs overflow-x-auto">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 pb-3 mb-3">
+        <h3 class="font-serif text-base sm:text-lg font-bold text-[#111315]">Full Botanical Extract · {{ product.title }}</h3>
+        <span class="font-mono text-xs uppercase font-bold text-[#c44900] bg-[#faf7f1] px-2.5 py-0.5 rounded-full border border-gray-200">
           Per 2 Capsules Dose
         </span>
       </div>
 
-      <!-- Desktop Table -->
-      <table class="w-full text-left text-xs sm:text-sm">
+      <table class="w-full text-left text-xs sm:text-sm min-w-[500px] sm:min-w-0">
         <thead>
           <tr class="border-b border-gray-200 font-mono text-[11px] font-bold text-gray-500 uppercase">
-            <th class="py-3 w-[30%]">Sanskrit & Devanagari</th>
-            <th class="py-3 w-[30%]">Botanical Binomial</th>
-            <th class="py-3 w-[25%]">Plant Part Used</th>
-            <th class="py-3 text-right w-[15%]">Per Dose</th>
+            <th class="py-2.5 w-[30%]">Sanskrit & Devanagari</th>
+            <th class="py-2.5 w-[30%]">Botanical Binomial</th>
+            <th class="py-2.5 w-[25%]">Plant Part Used</th>
+            <th class="py-2.5 text-right w-[15%]">Per Dose</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
           <tr class="hover:bg-gray-50/80 transition-colors">
-            <td class="py-3 pr-2 font-bold text-[#111315]">
-              Haritaki <span class="ml-2 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">हरीतकी</span>
+            <td class="py-2.5 pr-2 font-bold text-[#111315]">
+              Haritaki <span class="ml-1.5 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">हरीतकी</span>
             </td>
-            <td class="py-3 pr-2 italic text-gray-700 font-serif">Terminalia chebula</td>
-            <td class="py-3 pr-2 text-xs text-gray-700">
+            <td class="py-2.5 pr-2 italic text-gray-700 font-serif">Terminalia chebula</td>
+            <td class="py-2.5 pr-2 text-xs text-gray-700">
               <span class="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded font-mono text-[11px]">Fruit Pericarp</span>
             </td>
-            <td class="py-3 text-right font-mono font-bold text-[#111315]">250 mg</td>
+            <td class="py-2.5 text-right font-mono font-bold text-[#111315]">250 mg</td>
           </tr>
           <tr class="hover:bg-gray-50/80 transition-colors">
-            <td class="py-3 pr-2 font-bold text-[#111315]">
-              Amalaki <span class="ml-2 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">आमलेकी</span>
+            <td class="py-2.5 pr-2 font-bold text-[#111315]">
+              Amalaki <span class="ml-1.5 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">आमलेकी</span>
             </td>
-            <td class="py-3 pr-2 italic text-gray-700 font-serif">Phyllanthus emblica</td>
-            <td class="py-3 pr-2 text-xs text-gray-700">
+            <td class="py-2.5 pr-2 italic text-gray-700 font-serif">Phyllanthus emblica</td>
+            <td class="py-2.5 pr-2 text-xs text-gray-700">
               <span class="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded font-mono text-[11px]">Fresh Fruit Extract</span>
             </td>
-            <td class="py-3 text-right font-mono font-bold text-[#111315]">200 mg</td>
+            <td class="py-2.5 text-right font-mono font-bold text-[#111315]">200 mg</td>
           </tr>
           <tr class="hover:bg-gray-50/80 transition-colors">
-            <td class="py-3 pr-2 font-bold text-[#111315]">
-              Shunya (Sunthi) <span class="ml-2 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">शुण्ठी</span>
+            <td class="py-2.5 pr-2 font-bold text-[#111315]">
+              Shunya (Sunthi) <span class="ml-1.5 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">शुण्ठी</span>
             </td>
-            <td class="py-3 pr-2 italic text-gray-700 font-serif">Zingiber officinale</td>
-            <td class="py-3 pr-2 text-xs text-gray-700">
+            <td class="py-2.5 pr-2 italic text-gray-700 font-serif">Zingiber officinale</td>
+            <td class="py-2.5 pr-2 text-xs text-gray-700">
               <span class="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded font-mono text-[11px]">Cured Rhizome</span>
             </td>
-            <td class="py-3 text-right font-mono font-bold text-[#111315]">150 mg</td>
+            <td class="py-2.5 text-right font-mono font-bold text-[#111315]">150 mg</td>
           </tr>
           <tr class="hover:bg-gray-50/80 transition-colors">
-            <td class="py-3 pr-2 font-bold text-[#111315]">
-              Pippali <span class="ml-2 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">पिप्पली</span>
+            <td class="py-2.5 pr-2 font-bold text-[#111315]">
+              Pippali <span class="ml-1.5 font-deva text-xs font-semibold text-[#c44900] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">पिप्पली</span>
             </td>
-            <td class="py-3 pr-2 italic text-gray-700 font-serif">Piper longum</td>
-            <td class="py-3 pr-2 text-xs text-gray-700">
+            <td class="py-2.5 pr-2 italic text-gray-700 font-serif">Piper longum</td>
+            <td class="py-2.5 pr-2 text-xs text-gray-700">
               <span class="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded font-mono text-[11px]">Dried Inflorescence</span>
             </td>
-            <td class="py-3 text-right font-mono font-bold text-[#111315]">100 mg</td>
+            <td class="py-2.5 text-right font-mono font-bold text-[#111315]">100 mg</td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="border-t-2 border-[#111315] font-mono text-xs font-bold text-[#111315]">
-            <td colSpan="3" class="py-3 uppercase">Total Active Botanical Extract per dose</td>
-            <td class="py-3 text-right font-mono text-sm text-[#c44900]">700 mg</td>
+            <td colSpan="3" class="py-2.5 uppercase">Total Active Extract per dose</td>
+            <td class="py-2.5 text-right font-mono text-sm text-[#c44900]">700 mg</td>
           </tr>
         </tfoot>
       </table>
@@ -272,138 +269,127 @@
   </section>
 
   <!-- 3. DOSAGE & USAGE SECTION -->
-  <section id="how-to-take" class="scroll-mt-32">
-    <div class="mb-4">
+  <section id="how-to-take" class="scroll-mt-24">
+    <div class="mb-3">
       <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Dosage & Usage</p>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-1">How to take {{ product.title }}</h2>
+      <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">How to take {{ product.title }}</h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      <div class="bg-[#faf7f1] p-6 rounded-xl border border-gray-200">
-        <h3 class="font-serif text-lg font-bold text-[#111315] mb-4">2 Capsules, twice daily after meals</h3>
-        <dl class="grid grid-cols-2 gap-4 font-mono text-xs">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
+        <h3 class="font-serif text-base sm:text-lg font-bold text-[#111315] mb-3">2 Capsules, twice daily after meals</h3>
+        <dl class="grid grid-cols-2 gap-3 font-mono text-xs">
           <div>
             <dt class="text-gray-500 uppercase">Single Dose</dt>
-            <dd class="font-bold text-[#111315] mt-1">2 Capsules</dd>
+            <dd class="font-bold text-[#111315] mt-0.5">2 Capsules</dd>
           </div>
           <div>
             <dt class="text-gray-500 uppercase">Timing</dt>
-            <dd class="font-bold text-[#111315] mt-1">After meals</dd>
+            <dd class="font-bold text-[#111315] mt-0.5">After meals</dd>
           </div>
           <div>
-            <dt class="text-gray-500 uppercase">Anupana (Vehicle)</dt>
-            <dd class="font-bold text-[#111315] mt-1">Warm water</dd>
+            <dt class="text-gray-500 uppercase">Vehicle</dt>
+            <dd class="font-bold text-[#111315] mt-0.5">Warm water</dd>
           </div>
           <div>
-            <dt class="text-gray-500 uppercase">Course Duration</dt>
-            <dd class="font-bold text-[#111315] mt-1">6 to 8 weeks</dd>
+            <dt class="text-gray-500 uppercase">Duration</dt>
+            <dd class="font-bold text-[#111315] mt-0.5">6 to 8 weeks</dd>
           </div>
         </dl>
       </div>
 
-      <div class="bg-white p-6 rounded-xl border border-gray-200 space-y-4 text-xs sm:text-sm">
+      <div class="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 space-y-3 text-xs sm:text-sm">
         <h4 class="font-serif font-bold text-[#111315] text-base">Best Practice Instructions</h4>
-        <ul class="space-y-3 text-gray-600 list-disc pl-4">
-          <li>Take consistently twice a day, ideally 20–30 minutes after your main meals (Lunch & Dinner).</li>
-          <li>Swallow with lukewarm water to enhance bio-availability of essential polyphenols.</li>
-          <li>Maintain regular hydration (2.5–3L water daily) during the active course.</li>
+        <ul class="space-y-2 text-gray-600 list-disc pl-4">
+          <li>Take consistently twice a day, ideally 20–30 minutes after your main meals.</li>
+          <li>Swallow with lukewarm water to enhance bio-availability.</li>
+          <li>Maintain regular hydration (2.5–3L water daily) during active course.</li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- 4. SAFETY & GUIDANCE SECTION -->
-  <section id="safety" class="scroll-mt-32">
-    <div class="mb-4">
+  <section id="safety" class="scroll-mt-24">
+    <div class="mb-3">
       <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Safety & Quality</p>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-1">Safety Guidelines & Storage</h2>
+      <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">Safety Guidelines & Storage</h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/50">
-        <h3 class="font-serif text-base font-bold text-emerald-950">AYUSH Schedule T Compliant</h3>
-        <p class="text-xs text-emerald-800 mt-2 leading-relaxed">Manufactured under strict Schedule T GMP standards with certified heavy metal and microbial testing per batch.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
+        <h3 class="font-serif text-sm sm:text-base font-bold text-emerald-950">AYUSH Schedule T Compliant</h3>
+        <p class="text-xs text-emerald-800 mt-1 leading-relaxed">Manufactured under strict Schedule T GMP standards with certified heavy metal and microbial testing per batch.</p>
       </div>
-      <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/50">
-        <h3 class="font-serif text-base font-bold text-amber-950">Pregnancy & Nursing</h3>
-        <p class="text-xs text-amber-800 mt-2 leading-relaxed">Pregnant or lactating mothers should consult their primary physician before beginning any new botanical supplement.</p>
+      <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50">
+        <h3 class="font-serif text-sm sm:text-base font-bold text-amber-950">Pregnancy & Nursing</h3>
+        <p class="text-xs text-amber-800 mt-1 leading-relaxed">Pregnant or lactating mothers should consult their physician before beginning any new supplement.</p>
       </div>
-      <div class="p-5 rounded-xl border border-gray-200 bg-gray-50">
-        <h3 class="font-serif text-base font-bold text-[#111315]">Storage Directions</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">Store in a cool, dry place away from direct sunlight. Keep bottle cap tightly closed after each use.</p>
+      <div class="p-4 rounded-xl border border-gray-200 bg-gray-50">
+        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Storage Directions</h3>
+        <p class="text-xs text-gray-600 mt-1 leading-relaxed">Store in a cool, dry place away from direct sunlight. Keep cap tightly closed after each use.</p>
       </div>
     </div>
   </section>
 
   <!-- 5. REVIEWS SECTION -->
-  <section id="reviews" class="scroll-mt-32">
-    <div class="flex items-center justify-between mb-6">
+  <section id="reviews" class="scroll-mt-24">
+    <div class="flex items-center justify-between mb-4">
       <div>
         <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Verified Customer Experiences</p>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-1">Reviews & Feedback</h2>
-      </div>
-      <div class="hidden sm:flex items-center gap-2 font-mono text-sm font-bold text-[#111315]">
-        <span>4.9 / 5.0 Rating</span>
+        <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">Reviews & Feedback</h2>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-xs">
-        <div class="flex items-center justify-between mb-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+        <div class="flex items-center justify-between mb-2">
           <div class="flex text-[#c44900]">
-            {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
+            {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
           </div>
-          <span class="text-xs font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
+          <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
         </div>
-        <h3 class="font-serif text-base font-bold text-[#111315]">Noticeable difference in digestion after 2 weeks</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">I had chronic acidity and post-lunch heaviness. After taking this consistently for 14 days, the bloated feeling is completely gone. Super impressed with the purity.</p>
-        <p class="text-xs font-bold text-[#111315] mt-4">— Dr. Rajesh K., New Delhi</p>
+        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Noticeable difference in digestion after 2 weeks</h3>
+        <p class="text-xs text-gray-600 mt-1 leading-relaxed">I had chronic acidity and post-lunch heaviness. After taking this consistently for 14 days, the bloated feeling is completely gone.</p>
+        <p class="text-xs font-bold text-[#111315] mt-3">— Dr. Rajesh K., New Delhi</p>
       </div>
 
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-xs">
-        <div class="flex items-center justify-between mb-3">
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+        <div class="flex items-center justify-between mb-2">
           <div class="flex text-[#c44900]">
-            {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
+            {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
           </div>
-          <span class="text-xs font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
+          <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
         </div>
-        <h3 class="font-serif text-base font-bold text-[#111315]">Genuine Ayurvedic extract quality</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">Unlike cheap market pills full of fillers, you can tell this is pure extract. Easy on the stomach and no artificial smell. Highly recommended!</p>
-        <p class="text-xs font-bold text-[#111315] mt-4">— Ananya M., Bengaluru</p>
+        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Genuine Ayurvedic extract quality</h3>
+        <p class="text-xs text-gray-600 mt-1 leading-relaxed">Unlike cheap market pills full of fillers, you can tell this is pure extract. Easy on the stomach and no artificial smell.</p>
+        <p class="text-xs font-bold text-[#111315] mt-3">— Ananya M., Bengaluru</p>
       </div>
     </div>
   </section>
 
   <!-- 6. FAQS SECTION -->
-  <section id="questions" class="scroll-mt-32">
-    <div class="mb-6">
+  <section id="questions" class="scroll-mt-24">
+    <div class="mb-4">
       <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Answers</p>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-1">Frequently Asked Questions</h2>
+      <h2 class="font-serif text-xl sm:text-3xl font-bold text-[#111315] mt-1">Frequently Asked Questions</h2>
     </div>
 
-    <div class="space-y-4">
-      <details class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200 group">
-        <summary class="font-serif font-bold text-base text-[#111315] cursor-pointer flex items-center justify-between">
+    <div class="space-y-3">
+      <details class="bg-[#faf7f1] p-4 rounded-xl border border-gray-200 group">
+        <summary class="font-serif font-bold text-sm sm:text-base text-[#111315] cursor-pointer flex items-center justify-between">
           <span>How soon can I expect results from taking {{ product.title }}?</span>
-          <span class="text-lg transition-transform group-open:rotate-180">+</span>
+          <span class="text-base transition-transform group-open:rotate-180">+</span>
         </summary>
-        <p class="text-xs text-gray-600 mt-3 leading-relaxed">Most individuals notice initial digestive relief within 5–7 days. For metabolic and tissue-level benefits, a continuous 6 to 8-week course is recommended.</p>
+        <p class="text-xs text-gray-600 mt-2 leading-relaxed">Most individuals notice initial digestive relief within 5–7 days. For metabolic and tissue-level benefits, a continuous 6 to 8-week course is recommended.</p>
       </details>
 
-      <details class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200 group">
-        <summary class="font-serif font-bold text-base text-[#111315] cursor-pointer flex items-center justify-between">
-          <span>Are there any synthetic additives or preservatives in this formula?</span>
-          <span class="text-lg transition-transform group-open:rotate-180">+</span>
+      <details class="bg-[#faf7f1] p-4 rounded-xl border border-gray-200 group">
+        <summary class="font-serif font-bold text-sm sm:text-base text-[#111315] cursor-pointer flex items-center justify-between">
+          <span>Are there any synthetic additives in this formula?</span>
+          <span class="text-base transition-transform group-open:rotate-180">+</span>
         </summary>
-        <p class="text-xs text-gray-600 mt-3 leading-relaxed">No. All our remedies are 100% plant-based extracts packaged in vegetarian cellulose capsules without artificial colors, binder fillers, or chemical preservatives.</p>
-      </details>
-
-      <details class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200 group">
-        <summary class="font-serif font-bold text-base text-[#111315] cursor-pointer flex items-center justify-between">
-          <span>Can I take this alongside my existing prescription medication?</span>
-          <span class="text-lg transition-transform group-open:rotate-180">+</span>
-        </summary>
-        <p class="text-xs text-gray-600 mt-3 leading-relaxed">Yes, maintain a 45-minute gap between taking your conventional prescription medication and taking our botanical extracts. If you are on heavy immunosuppressants, consult your doctor.</p>
+        <p class="text-xs text-gray-600 mt-2 leading-relaxed">No. All our remedies are 100% plant-based extracts packaged in vegetarian cellulose capsules without artificial colors or chemical preservatives.</p>
       </details>
     </div>
   </section>

@@ -3,9 +3,6 @@
     "hero": {
       "type": "hero"
     },
-    "trust-bar": {
-      "type": "trust-bar"
-    },
     "product-carousel": {
       "type": "product-carousel"
     },
@@ -24,7 +21,6 @@
   },
   "order": [
     "hero",
-    "trust-bar",
     "product-carousel",
     "health-concerns",
     "quality-banner",
