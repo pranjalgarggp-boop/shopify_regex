@@ -1,0 +1,72 @@
+<section class="mx-auto max-w-7xl px-5 py-8 lg:px-8 lg:py-16">
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+    
+    <!-- Product Images -->
+    <div class="space-y-4">
+      <div class="aspect-[4/5] w-full overflow-hidden rounded-xl bg-gray-100">
+        {% if product.featured_image %}
+          <img
+            src="{{ product.featured_image | img_url: '1000x' }}"
+            alt="{{ product.title }}"
+            class="h-full w-full object-cover object-center"
+          />
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'h-full w-full bg-gray-200' }}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="flex flex-col">
+      <h1 class="font-serif text-3xl font-bold tracking-tight text-[#111315] sm:text-4xl">
+        {{ product.title }}
+      </h1>
+      
+      <div class="mt-4 flex items-center gap-2">
+        <span class="text-2xl font-bold tabular-nums tracking-tight text-[#c44900]">
+          {{ product.price | money }}
+        </span>
+      </div>
+
+      <div class="prose prose-sm mt-6 max-w-none text-gray-600">
+        {{ product.description }}
+      </div>
+
+      <!-- Add to Cart Form -->
+      <div class="mt-10">
+        {% form 'product', product, class: 'form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex h-12 w-32 items-center justify-between rounded border border-gray-300 px-4">
+              <button type="button" class="text-gray-500 hover:text-black" onclick="this.nextElementSibling.stepDown()">-</button>
+              <input type="number" name="quantity" value="1" min="1" class="w-12 text-center text-sm font-bold bg-transparent border-none outline-none appearance-none" />
+              <button type="button" class="text-gray-500 hover:text-black" onclick="this.previousElementSibling.stepUp()">+</button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="flex w-full items-center justify-center rounded bg-[#111315] px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-[#c44900]"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {% if product.available %}
+              Add to Cart
+            {% else %}
+              Out of Stock
+            {% endif %}
+          </button>
+        {% endform %}
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}

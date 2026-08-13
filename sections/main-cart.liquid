@@ -1,0 +1,62 @@
+<section class="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+  <div class="mb-8">
+    <h1 class="font-serif text-3xl font-bold text-[#111315]">Your Cart</h1>
+  </div>
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" id="cart">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <div class="lg:col-span-8 space-y-6">
+          {% for item in cart.items %}
+            <div class="flex gap-4 border-b border-gray-200 pb-6">
+              <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.title }}" class="w-24 h-24 object-cover rounded bg-gray-100">
+              <div class="flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 class="font-bold text-sm text-[#111315]">{{ item.product.title }}</h3>
+                  {% unless item.product.has_only_default_variant %}
+                    <p class="text-xs text-gray-500">{{ item.variant.title }}</p>
+                  {% endunless %}
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center border border-gray-300 rounded h-8 w-24">
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" class="w-full text-center text-sm bg-transparent outline-none">
+                  </div>
+                  <span class="font-bold text-sm text-[#c44900]">{{ item.final_line_price | money }}</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          <button type="submit" name="update" class="text-sm font-medium text-gray-500 hover:text-black underline">Update Cart</button>
+        </div>
+
+        <div class="lg:col-span-4">
+          <div class="bg-[#faf9f5] p-6 rounded-lg border border-gray-200">
+            <h2 class="font-bold text-lg mb-4 text-[#111315]">Order Summary</h2>
+            <div class="flex justify-between mb-4 border-b border-gray-200 pb-4">
+              <span class="text-sm text-gray-600">Subtotal</span>
+              <span class="font-bold text-[#c44900]">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-6">Taxes and shipping calculated at checkout.</p>
+            <button type="submit" name="checkout" class="w-full bg-[#111315] text-white font-bold py-4 rounded hover:bg-[#c44900] transition-colors">
+              Proceed to Checkout
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  {% else %}
+    <div class="py-20 text-center">
+      <h2 class="text-2xl font-serif text-[#111315] mb-4">Your cart is currently empty.</h2>
+      <a href="{{ routes.all_products_collection_url }}" class="inline-block bg-[#111315] text-white px-8 py-3 font-bold hover:bg-[#c44900]">Continue Shopping</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}
