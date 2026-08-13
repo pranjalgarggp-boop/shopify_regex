@@ -10,33 +10,35 @@
     animation: marquee-continuous 30s linear infinite;
   }
   body {
-    padding-top: 5.5rem; /* Space for fixed header + banner */
+    /* Space for fixed header + banner - removed since we are using sticky */
   }
 </style>
-<div class="fixed inset-x-0 top-0 z-[51] bg-[#111315] text-[#ffffff] font-mono shadow-sm overflow-hidden h-8 flex items-center">
-  <div class="animate-marquee-continuous font-bold tracking-wider py-0.5">
-    {% for i in (1..4) %}
-    <span class="flex items-center gap-6 whitespace-nowrap px-4 text-[11px] sm:text-xs">
-      <span class="flex items-center gap-1.5 text-[#c4923e]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>AYUSH LICENCE: <strong class="text-white">PB/AY/000000</strong></span>
-      </span>
-      <span class="text-white/30">•</span>
-      <span class="text-white font-bold">
-        FREE EXPRESS SHIPPING ON ORDERS OVER <strong class="text-[#c4923e]">₹599</strong>
-      </span>
-      <span class="text-white/30">•</span>
-      <span class="text-[#25D366] font-bold">OFFICIAL WHATSAPP SUPPORT AVAILABLE</span>
-      <span class="text-white/30">•</span>
-      <span class="text-[#c4923e]">SCHEDULE T GMP CERTIFIED FACILITY</span>
-      <span class="text-white/30">•</span>
-    </span>
-    {% endfor %}
-  </div>
-</div>
 
-<!-- Main Header -->
-<header class="fixed inset-x-0 top-8 z-50 bg-white/95 backdrop-blur-md transition-all duration-200 border-b border-gray-200 shadow-sm">
+<div class="sticky top-0 z-50">
+  <div class="bg-[#111315] text-[#ffffff] font-mono shadow-sm overflow-hidden h-8 flex items-center w-full">
+    <div class="animate-marquee-continuous font-bold tracking-wider py-0.5">
+      {% for i in (1..4) %}
+      <span class="flex items-center gap-6 whitespace-nowrap px-4 text-[11px] sm:text-xs">
+        <span class="flex items-center gap-1.5 text-[#c4923e]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>AYUSH LICENCE: <strong class="text-white">PB/AY/000000</strong></span>
+        </span>
+        <span class="text-white/30">•</span>
+        <span class="text-white font-bold">
+          FREE EXPRESS SHIPPING ON ORDERS OVER <strong class="text-[#c4923e]">₹599</strong>
+        </span>
+        <span class="text-white/30">•</span>
+        <span class="text-[#25D366] font-bold">OFFICIAL WHATSAPP SUPPORT AVAILABLE</span>
+        <span class="text-white/30">•</span>
+        <span class="text-[#c4923e]">SCHEDULE T GMP CERTIFIED FACILITY</span>
+        <span class="text-white/30">•</span>
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="w-full bg-white/95 backdrop-blur-md transition-all duration-200 border-b border-gray-200 shadow-sm">
   <div class="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between gap-2 px-5 lg:px-8">
     
     <!-- Mobile Menu Button -->
@@ -105,6 +107,7 @@
 
   </div>
 </header>
+</div>
 
 {% schema %}
 {
