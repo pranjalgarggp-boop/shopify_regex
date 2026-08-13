@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <title>
@@ -18,16 +18,46 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
+    <!-- Google Fonts (Inter, Playfair Display, IBM Plex Mono, IBM Plex Sans Devanagari) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        --font-playfair: 'Playfair Display', ui-serif, Georgia, serif;
+        --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+        --font-plex-mono: 'IBM Plex Mono', ui-monospace, monospace;
+        --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+        --font-plex-deva: 'IBM Plex Sans Devanagari', sans-serif;
+        --font-deva: 'IBM Plex Sans Devanagari', sans-serif;
+      }
+      body {
+        font-family: var(--font-inter);
+      }
+      h1, h2, h3, .font-serif {
+        font-family: var(--font-playfair);
+      }
+      .font-mono {
+        font-family: var(--font-plex-mono);
+      }
+      .font-deva {
+        font-family: var(--font-plex-deva);
+      }
+    </style>
+
     {{ content_for_header }}
     
-    <!-- We will inject compiled Tailwind CSS here -->
+    <!-- Compiled Tailwind CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
 
-  <body class="bg-[#faf7f1] text-[#111315]">
+  <body class="bg-white text-[#111315] font-sans antialiased">
     {% section 'header' %}
 
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none pt-20 sm:pt-24" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
