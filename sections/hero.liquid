@@ -43,23 +43,20 @@
     </div>
 
     <!-- Image Content -->
-    <div class="w-full lg:w-6/12 relative aspect-[4/3] lg:aspect-auto lg:h-[600px] overflow-hidden">
+    <div class="w-full lg:w-7/12 relative rounded-sm overflow-hidden shadow-sm bg-white p-1 border border-gray-100">
       {% if section.settings.image != blank %}
         <img
           src="{{ section.settings.image | img_url: 'master' }}"
           alt="Ayurvedic herbs and formulations"
-          class="absolute inset-0 w-full h-full object-cover object-center rounded-sm"
+          class="w-full h-auto object-contain block"
         />
       {% else %}
         <img
-          src="{{ 'banner-hero-products.jpg' | asset_url }}"
+          src="{{ 'banner-natural-remedies.jpg' | asset_url }}"
           alt="Regex Remedies Hero"
-          class="absolute inset-0 w-full h-full object-cover object-center rounded-sm"
+          class="w-full h-auto object-contain block"
         />
       {% endif %}
-      <!-- Decorative element -->
-      <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-[#c44900]/10 rounded-full blur-2xl"></div>
-      <div class="absolute top-4 -left-4 w-24 h-24 bg-[#111315]/5 rounded-full blur-xl"></div>
     </div>
   </div>
 </section>
