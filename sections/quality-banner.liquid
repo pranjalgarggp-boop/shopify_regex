@@ -6,7 +6,7 @@
         <span class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">
           {{ section.settings.kicker | default: "QUALITY & BOTANICAL PURITY" }}
         </span>
-        <h2 class="font-serif text-2xl sm:text-4xl text-[#111315] font-bold leading-tight">
+        <h2 class="font-serif text-2xl sm:text-3xl text-[#111315] font-bold leading-tight">
           {{ section.settings.heading | default: "Tested for Heavy Metals, Microbes & Assay Potency" }}
         </h2>
         <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
@@ -34,21 +34,23 @@
         </div>
       </div>
 
-      <!-- Right Image Side (Mobile Optimized height) -->
-      <div class="md:col-span-5 relative h-48 sm:h-64 md:h-full min-h-[200px] w-full rounded-xl overflow-hidden border border-gray-200">
-        {% if section.settings.image != blank %}
-          <img
-            src="{{ section.settings.image | img_url: '800x' }}"
-            alt="Quality Manufacturing"
-            class="w-full h-full object-cover"
-          />
-        {% else %}
-          <img
-            src="{{ 'banner-lab-quality.jpg' | asset_url }}"
-            alt="Regex Remedies Lab Quality"
-            class="w-full h-full object-cover"
-          />
-        {% endif %}
+      <!-- Right Image Side — 100% Pristine Un-cropped Lab Banner Matching Vercel -->
+      <div class="md:col-span-5">
+        <div class="relative w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white p-1">
+          {% if section.settings.image != blank %}
+            <img
+              src="{{ section.settings.image | img_url: '800x' }}"
+              alt="Quality Control Lab"
+              class="w-full h-auto object-contain rounded-lg block"
+            />
+          {% else %}
+            <img
+              src="{{ 'banner-lab-quality.jpg' | asset_url }}"
+              alt="Regex Remedies Lab Quality"
+              class="w-full h-auto object-contain rounded-lg block"
+            />
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

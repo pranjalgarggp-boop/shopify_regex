@@ -1,4 +1,4 @@
-<section id="testimonials" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-b border-gray-100">
+<section id="testimonials" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-b border-gray-100 bg-[#faf9f5]/50">
   <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 text-left gap-2">
     <div>
       <span class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">
@@ -7,13 +7,17 @@
       <h2 class="font-serif text-2xl sm:text-3xl text-[#111315] font-bold mt-1">
         {{ section.settings.heading | default: "Trusted by Ayurvedic Physicians & Patients" }}
       </h2>
+      <p class="text-xs sm:text-sm text-gray-600 mt-1">
+        Swipe horizontally to read verified clinical feedback ← →
+      </p>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
+  <!-- Horizontal Touch Carousel (Side-Scrollable) -->
+  <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 text-left -mx-4 px-4 sm:mx-0 sm:px-0">
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
-        <div class="bg-[#faf9f5] border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div class="w-[280px] sm:w-[320px] shrink-0 snap-start bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
             <div class="flex text-[#c44900] mb-2">
               {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
@@ -29,8 +33,8 @@
         </div>
       {% endfor %}
     {% else %}
-      <!-- Fallback Hardcoded Vercel Testimonials -->
-      <div class="bg-[#faf9f5] border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+      <!-- Fallback Hardcoded Vercel Testimonials (Side-Scrollable Cards) -->
+      <div class="w-[280px] sm:w-[320px] shrink-0 snap-start bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
         <div>
           <div class="flex text-[#c44900] mb-2">
             {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
@@ -45,7 +49,7 @@
         </div>
       </div>
 
-      <div class="bg-[#faf9f5] border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+      <div class="w-[280px] sm:w-[320px] shrink-0 snap-start bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
         <div>
           <div class="flex text-[#c44900] mb-2">
             {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
@@ -60,7 +64,7 @@
         </div>
       </div>
 
-      <div class="bg-[#faf9f5] border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+      <div class="w-[280px] sm:w-[320px] shrink-0 snap-start bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
         <div>
           <div class="flex text-[#c44900] mb-2">
             {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}

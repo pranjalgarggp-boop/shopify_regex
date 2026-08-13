@@ -18,7 +18,7 @@
     </ol>
   </nav>
 
-  <!-- ── Buy Block (Premium Editorial Mobile-Optimized Layout) ─────────────────────────── -->
+  <!-- ── Buy Block (Premium Editorial Layout) ─────────────────────────── -->
   <div class="grid gap-6 lg:gap-16 lg:grid-cols-12 items-start">
     
     <!-- Gallery Box (object-contain so bottle is centered & never cropped) -->
@@ -47,7 +47,7 @@
         </div>
       </div>
       
-      <!-- Gallery Thumbnails (Max 4 thumbnails for mobile optimization) -->
+      <!-- Gallery Thumbnails (Max 4 thumbnails) -->
       {% if product.images.size > 1 %}
         <div class="flex gap-2.5 overflow-x-auto no-scrollbar pb-1">
           {% for image in product.images limit: 4 %}
@@ -148,7 +148,7 @@
   </div>
 </div>
 
-<!-- ── Sticky Section Navigation Bar (Mobile Optimized) ─────────────────────────────────── -->
+<!-- ── Sticky Section Navigation Bar ─────────────────────────────────── -->
 <nav aria-label="Sections of this page" class="sticky top-[56px] sm:top-[88px] z-30 mt-8 border-y border-gray-200 bg-white/95 backdrop-blur-md">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex gap-6 overflow-x-auto py-2.5 no-scrollbar text-xs sm:text-sm font-bold">
     <a href="#overview" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Overview</a>
@@ -171,23 +171,23 @@
         {% if product.description != blank %}
           {{ product.description | strip_html | truncatewords: 20 }}
         {% else %}
-          Classical formulation designed to restore digestive harmony and metabolic balance.
+          Classical Ayurvedic extract standardized for active carminatives, gastrointestinal lining support, and metabolic enzymatic balance.
         {% endif %}
       </h2>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
-        <h3 class="font-serif text-base font-bold text-[#111315]">Enhanced Metabolic Absorption</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-1">Promotes optimal enzymatic secretion and nutrient breakdown for sustained cellular energy.</p>
+        <h3 class="font-serif text-base font-bold text-[#111315]">Standardized Botanical Actives</h3>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Extracted to guarantee 100% active polyphenol potency per dose for consistent clinical efficacy.</p>
       </div>
       <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
-        <h3 class="font-serif text-base font-bold text-[#111315]">Gastrointestinal Soothing</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-1">Reduces acidity, bloating, and post-meal sluggishness using concentrated botanical carminatives.</p>
+        <h3 class="font-serif text-base font-bold text-[#111315]">Carminative Motility Support</h3>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Relieves digestive heaviness and hyperacidity through targeted herbal carminative compounds.</p>
       </div>
       <div class="bg-[#faf7f1] p-4 sm:p-5 rounded-xl border border-gray-200">
-        <h3 class="font-serif text-base font-bold text-[#111315]">Gut Microbiome Support</h3>
-        <p class="text-xs text-gray-600 leading-relaxed mt-1">Nurtures beneficial intestinal flora to reinforce the gut-lining barrier and digestive vitality.</p>
+        <h3 class="font-serif text-base font-bold text-[#111315]">Mucosal Layer Integrity</h3>
+        <p class="text-xs text-gray-600 leading-relaxed mt-1">Protects the gastrointestinal lining and promotes healthy intestinal microflora activity.</p>
       </div>
     </div>
   </section>
@@ -288,8 +288,8 @@
             <dd class="font-bold text-[#111315] mt-0.5">After meals</dd>
           </div>
           <div>
-            <dt class="text-gray-500 uppercase">Vehicle</dt>
-            <dd class="font-bold text-[#111315] mt-0.5">Warm water</dd>
+            <dt class="text-gray-500 uppercase">Vehicle (Anupana)</dt>
+            <dd class="font-bold text-[#111315] mt-0.5">Lukewarm water</dd>
           </div>
           <div>
             <dt class="text-gray-500 uppercase">Duration</dt>
@@ -301,8 +301,8 @@
       <div class="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 space-y-3 text-xs sm:text-sm">
         <h4 class="font-serif font-bold text-[#111315] text-base">Best Practice Instructions</h4>
         <ul class="space-y-2 text-gray-600 list-disc pl-4">
-          <li>Take consistently twice a day, ideally 20–30 minutes after your main meals.</li>
-          <li>Swallow with lukewarm water to enhance bio-availability.</li>
+          <li>Take consistently twice a day, 20 minutes after your main meals (Lunch & Dinner).</li>
+          <li>Swallow with lukewarm water to optimize active botanical assimilation.</li>
           <li>Maintain regular hydration (2.5–3L water daily) during active course.</li>
         </ul>
       </div>
@@ -347,11 +347,11 @@
           <div class="flex text-[#c44900]">
             {% for i in (1..5) %}<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{% endfor %}
           </div>
-          <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
+          <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Physician</span>
         </div>
-        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Noticeable difference in digestion after 2 weeks</h3>
-        <p class="text-xs text-gray-600 mt-1 leading-relaxed">I had chronic acidity and post-lunch heaviness. After taking this consistently for 14 days, the bloated feeling is completely gone.</p>
-        <p class="text-xs font-bold text-[#111315] mt-3">— Dr. Rajesh K., New Delhi</p>
+        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Standardized extract quality for clinical recommendation</h3>
+        <p class="text-xs text-gray-600 mt-1 leading-relaxed">Regex Remedies formulations are standardized to pure active extracts. I routinely recommend Livgex for my patients recovering from sluggish liver function.</p>
+        <p class="text-xs font-bold text-[#111315] mt-3">— Dr. Rajesh Sharma, BAMS</p>
       </div>
 
       <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
@@ -361,9 +361,9 @@
           </div>
           <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">✓ Verified Buyer</span>
         </div>
-        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Genuine Ayurvedic extract quality</h3>
+        <h3 class="font-serif text-sm sm:text-base font-bold text-[#111315]">Genuine Ayurvedic extract quality without fillers</h3>
         <p class="text-xs text-gray-600 mt-1 leading-relaxed">Unlike cheap market pills full of fillers, you can tell this is pure extract. Easy on the stomach and no artificial smell.</p>
-        <p class="text-xs font-bold text-[#111315] mt-3">— Ananya M., Bengaluru</p>
+        <p class="text-xs font-bold text-[#111315] mt-3">— Ananya Mehta, Bengaluru</p>
       </div>
     </div>
   </section>
