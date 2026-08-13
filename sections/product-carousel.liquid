@@ -1,11 +1,11 @@
-<section id="catalogue" class="mx-auto max-w-7xl px-5 lg:px-8 py-6 sm:py-10 border-b border-gray-100">
-  <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 text-left gap-2">
+<section id="catalogue" class="mx-auto max-w-7xl px-5 lg:px-8 py-8 sm:py-12 border-b border-gray-100">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 text-left gap-2">
     <div>
-      <span class="font-mono text-[c44900] font-bold text-xs uppercase tracking-widest">{{ section.settings.kicker }}</span>
-      <h2 class="font-serif text-2xl sm:text-3xl text-[#111315] font-bold mt-0.5">
+      <span class="font-mono text-[#c44900] font-bold text-xs uppercase tracking-widest">{{ section.settings.kicker }}</span>
+      <h2 class="font-serif text-2xl sm:text-3xl text-[#111315] font-bold mt-1">
         {{ section.settings.heading }}
       </h2>
-      <p class="text-xs sm:text-sm text-gray-600 mt-0.5">
+      <p class="text-xs sm:text-sm text-gray-600 mt-1">
         {{ section.settings.subtitle }}
       </p>
     </div>
@@ -14,33 +14,88 @@
         {{ section.settings.button_label }}
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
+    {% else %}
+      <a href="{{ routes.all_products_collection_url }}" class="inline-flex items-center justify-center gap-1 bg-transparent border border-gray-300 text-[#111315] hover:bg-gray-50 rounded-full px-5 py-2 font-bold text-xs self-start sm:self-auto transition-colors">
+        All 5 Remedies
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     {% endif %}
   </div>
 
-  <!-- Horizontal Touch Carousel -->
-  <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-3 text-left -mx-5 px-5 sm:mx-0 sm:px-0" style="-ms-overflow-style: none; scrollbar-width: none;">
-    {% for product in section.settings.collection.products %}
-      <div class="w-[280px] sm:w-[320px] shrink-0 snap-start">
-        {% render 'product-card', product: product %}
-      </div>
-    {% else %}
-      {% for i in (1..4) %}
-        <div class="w-[280px] sm:w-[320px] shrink-0 snap-start">
-          <div class="h-[400px] bg-gray-100 rounded-xl flex items-center justify-center">
-            <span class="text-gray-400">Select Collection</span>
-          </div>
+  <!-- Horizontal Touch Carousel for Mobile & Desktop -->
+  <div class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 text-left -mx-5 px-5 sm:mx-0 sm:px-0">
+    {% assign products_to_show = section.settings.collection.products %}
+    {% if products_to_show.size > 0 %}
+      {% for product in products_to_show %}
+        <div class="w-[260px] sm:w-[300px] shrink-0 snap-start">
+          {% render 'product-card', product: product %}
         </div>
       {% endfor %}
-    {% endfor %}
+    {% else %}
+      {% assign all_prods = collections.all.products %}
+      {% if all_prods.size > 0 %}
+        {% for product in all_prods limit: 5 %}
+          <div class="w-[260px] sm:w-[300px] shrink-0 snap-start">
+            {% render 'product-card', product: product %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Rich Hardcoded Vercel Remedy Cards Fallback if Shopify Store has 0 products -->
+        <div class="w-[260px] sm:w-[300px] shrink-0 snap-start bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
+          <div class="aspect-square bg-[#faf7f1] rounded-lg overflow-hidden mb-3">
+            <img src="{{ 'product-shilajit.jpg' | asset_url }}" alt="Gasogex" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#c44900] uppercase">Digestive Health</span>
+          <h3 class="font-serif text-lg font-bold text-[#111315]">Gasogex</h3>
+          <p class="text-xs text-gray-500 line-clamp-2 mt-1">Carminative & Anti-flatulent digestive extract.</p>
+          <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+            <span class="font-bold text-[#111315]">₹1,499</span>
+            <a href="/products/gasogex" class="text-xs font-bold bg-[#111315] text-white px-3 py-1.5 rounded hover:bg-[#c44900]">View</a>
+          </div>
+        </div>
+
+        <div class="w-[260px] sm:w-[300px] shrink-0 snap-start bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
+          <div class="aspect-square bg-[#faf7f1] rounded-lg overflow-hidden mb-3">
+            <img src="{{ 'product-curcumin.jpg' | asset_url }}" alt="Livgex" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#c44900] uppercase">Liver Protection</span>
+          <h3 class="font-serif text-lg font-bold text-[#111315]">Livgex</h3>
+          <p class="text-xs text-gray-500 line-clamp-2 mt-1">Hepatoprotective & Detoxifying Liver Formula.</p>
+          <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+            <span class="font-bold text-[#111315]">₹1,699</span>
+            <a href="/products/livgex" class="text-xs font-bold bg-[#111315] text-white px-3 py-1.5 rounded hover:bg-[#c44900]">View</a>
+          </div>
+        </div>
+
+        <div class="w-[260px] sm:w-[300px] shrink-0 snap-start bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
+          <div class="aspect-square bg-[#faf7f1] rounded-lg overflow-hidden mb-3">
+            <img src="{{ 'product-ashwagandha.jpg' | asset_url }}" alt="Kabzraj" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#c44900] uppercase">Bowel Movement</span>
+          <h3 class="font-serif text-lg font-bold text-[#111315]">Kabzraj</h3>
+          <p class="text-xs text-gray-500 line-clamp-2 mt-1">Gentle Overnight Laxative & Bowel Cleanser.</p>
+          <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+            <span class="font-bold text-[#111315]">₹1,299</span>
+            <a href="/products/kabzraj" class="text-xs font-bold bg-[#111315] text-white px-3 py-1.5 rounded hover:bg-[#c44900]">View</a>
+          </div>
+        </div>
+
+        <div class="w-[260px] sm:w-[300px] shrink-0 snap-start bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
+          <div class="aspect-square bg-[#faf7f1] rounded-lg overflow-hidden mb-3">
+            <img src="{{ 'product-probiotics.jpg' | asset_url }}" alt="Pilegex" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#c44900] uppercase">Vascular Support</span>
+          <h3 class="font-serif text-lg font-bold text-[#111315]">Pilegex</h3>
+          <p class="text-xs text-gray-500 line-clamp-2 mt-1">Anorectal & Haemorrhoidal Relief Care.</p>
+          <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+            <span class="font-bold text-[#111315]">₹1,599</span>
+            <a href="/products/pilegex" class="text-xs font-bold bg-[#111315] text-white px-3 py-1.5 rounded hover:bg-[#c44900]">View</a>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
 </section>
-
-<style>
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-</style>
 
 {% schema %}
 {
@@ -73,7 +128,7 @@
       "type": "text",
       "id": "button_label",
       "label": "Button Label",
-      "default": "All Remedies"
+      "default": "All 5 Remedies"
     },
     {
       "type": "url",
