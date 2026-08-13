@@ -1,0 +1,66 @@
+<footer class="mt-10 sm:mt-14 bg-[#111315] text-white border-t border-gray-800 py-8 sm:py-10">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8 space-y-6 text-left">
+    <!-- Top Compact Brand & Nav Bar -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+      <div class="flex items-center gap-3">
+        <img
+          src="{{ 'emblem-paper.png' | asset_url }}"
+          alt="Regex Remedies Emblem"
+          class="h-8 w-8 sm:h-9 sm:w-9 object-contain"
+        />
+        <div>
+          <span class="font-serif text-lg font-bold text-white block leading-none">
+            {{ shop.name }}
+          </span>
+          <span class="font-mono text-[10px] text-[#c44900] font-bold">
+            Natural Ayurvedic Remedies
+          </span>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center gap-4 text-xs font-mono font-bold text-gray-300">
+        {% for link in linklists.footer.links %}
+          <a href="{{ link.url }}" class="hover:text-[#c44900] transition-colors">
+            {{ link.title | upcase }}
+          </a>
+          {% unless forloop.last %}<span>•</span>{% endunless %}
+        {% endfor %}
+        <span>•</span>
+        <a href="https://wa.me/918360053594" target="_blank" rel="noreferrer" class="hover:text-[#25D366] transition-colors">
+          WHATSAPP SUPPORT
+        </a>
+      </nav>
+    </div>
+
+    <!-- Middle Statutory License Strip -->
+    <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-gray-400">
+      <div>
+        <span>AYUSH LICENCE: <strong class="text-[#c44900]">PB/AY/000000</strong></span>
+        <span class="mx-2">•</span>
+        <span>SCHEDULE T <strong class="text-[#25D366]">GMP CERTIFIED</strong></span>
+      </div>
+      <div>
+        <span>FSSAI NO: <strong>10000000000000</strong></span>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[10px] text-gray-500">
+      <p>
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. ALL RIGHTS RESERVED.<br />
+        Regex Remedies® is a registered trademark.
+      </p>
+      
+      <p class="max-w-xs sm:text-right">
+        These statements have not been evaluated by the FDA. These products are not intended to diagnose, treat, cure, or prevent any disease.
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}
