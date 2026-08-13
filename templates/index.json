@@ -1,10 +1,26 @@
 {
   "sections": {
-    "main": {
+    "hero": {
       "type": "hero"
+    },
+    "trust-bar": {
+      "type": "trust-bar"
+    },
+    "product-carousel": {
+      "type": "product-carousel"
+    },
+    "health-concerns": {
+      "type": "health-concerns"
+    },
+    "quality-banner": {
+      "type": "quality-banner"
     }
   },
   "order": [
-    "main"
+    "hero",
+    "trust-bar",
+    "product-carousel",
+    "health-concerns",
+    "quality-banner"
   ]
 }

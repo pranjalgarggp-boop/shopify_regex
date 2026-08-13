@@ -1,0 +1,45 @@
+<a href="{{ product.url }}" class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-xs transition-all hover:-translate-y-1 hover:shadow-md border border-gray-100 hover:border-[#c44900]">
+  <!-- Image -->
+  <div class="relative aspect-square overflow-hidden bg-[#faf9f5]">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | img_url: '600x' }}"
+        alt="{{ product.title }}"
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'h-full w-full bg-gray-200' }}
+    {% endif %}
+    
+    <!-- Care Level Badge -->
+    <div class="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold tracking-widest text-[#111315] shadow-xs backdrop-blur-md">
+      <span class="flex h-1.5 w-1.5 rounded-full bg-[#c44900]"></span>
+      TARGETED CARE
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="flex flex-1 flex-col p-4 sm:p-5">
+    <div class="flex flex-col gap-1 mb-2">
+      <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#111315] leading-tight">
+        {{ product.title }}
+      </h3>
+      <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+        {{ product.description | strip_html | truncatewords: 15 }}
+      </p>
+    </div>
+
+    <!-- Rating -->
+    <div class="mt-auto pt-4 flex items-center justify-between">
+      <div class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#c44900" stroke="#c44900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span class="text-xs font-bold text-gray-700">4.9</span>
+      </div>
+      
+      <span class="font-bold text-[#c44900] bg-[#c44900]/10 px-2 py-0.5 rounded text-sm">
+        {{ product.price | money }}
+      </span>
+    </div>
+  </div>
+</a>

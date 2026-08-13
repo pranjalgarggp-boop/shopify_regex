@@ -1,0 +1,90 @@
+<section id="catalogue" class="mx-auto max-w-7xl px-5 lg:px-8 py-6 sm:py-10 border-b border-gray-100">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 text-left gap-2">
+    <div>
+      <span class="font-mono text-[c44900] font-bold text-xs uppercase tracking-widest">{{ section.settings.kicker }}</span>
+      <h2 class="font-serif text-2xl sm:text-3xl text-[#111315] font-bold mt-0.5">
+        {{ section.settings.heading }}
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-600 mt-0.5">
+        {{ section.settings.subtitle }}
+      </p>
+    </div>
+    {% if section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="inline-flex items-center justify-center gap-1 bg-transparent border border-gray-300 text-[#111315] hover:bg-gray-50 rounded-full px-5 py-2 font-bold text-xs self-start sm:self-auto transition-colors">
+        {{ section.settings.button_label }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    {% endif %}
+  </div>
+
+  <!-- Horizontal Touch Carousel -->
+  <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-3 text-left -mx-5 px-5 sm:mx-0 sm:px-0" style="-ms-overflow-style: none; scrollbar-width: none;">
+    {% for product in section.settings.collection.products %}
+      <div class="w-[280px] sm:w-[320px] shrink-0 snap-start">
+        {% render 'product-card', product: product %}
+      </div>
+    {% else %}
+      {% for i in (1..4) %}
+        <div class="w-[280px] sm:w-[320px] shrink-0 snap-start">
+          <div class="h-[400px] bg-gray-100 rounded-xl flex items-center justify-center">
+            <span class="text-gray-400">Select Collection</span>
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "THE RANGE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our 5 Classical Formulations"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Swipe horizontally to view all remedies ← →"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "All Remedies"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Carousel"
+    }
+  ]
+}
+{% endschema %}
