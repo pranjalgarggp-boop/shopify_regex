@@ -14,6 +14,12 @@
     },
     "quality-banner": {
       "type": "quality-banner"
+    },
+    "testimonials": {
+      "type": "testimonials"
+    },
+    "faqs": {
+      "type": "faqs"
     }
   },
   "order": [
@@ -21,6 +27,8 @@
     "trust-bar",
     "product-carousel",
     "health-concerns",
-    "quality-banner"
+    "quality-banner",
+    "testimonials",
+    "faqs"
   ]
 }

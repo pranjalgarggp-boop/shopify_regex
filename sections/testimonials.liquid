@@ -1,0 +1,96 @@
+<section class="bg-[#111315] text-white py-12 sm:py-20 border-b border-gray-800">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    
+    <div class="text-center mb-10">
+      <span class="font-mono text-xs font-bold text-[#c4923e] tracking-widest uppercase">
+        {{ section.settings.kicker }}
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2">
+        {{ section.settings.heading }}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+      {% for block in section.blocks %}
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex gap-1 text-[#c4923e] mb-4">
+              {% for i in (1..5) %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {% endfor %}
+            </div>
+            <p class="font-serif text-lg leading-relaxed text-gray-200 mb-6 italic">
+              "{{ block.settings.quote }}"
+            </p>
+          </div>
+          <div class="border-t border-white/10 pt-4 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-xs text-white">
+              {{ block.settings.author | slice: 0 }}
+            </div>
+            <div>
+              <p class="font-bold text-sm">{{ block.settings.author }}</p>
+              <p class="text-[10px] text-gray-400 font-mono tracking-wider">{{ block.settings.product_used }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "WALL OF LOVE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted by 10,000+ Customers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "This product completely changed my life."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Pranjal G."
+        },
+        {
+          "type": "text",
+          "id": "product_used",
+          "label": "Product Used",
+          "default": "Used LIVGEX for 3 months"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
