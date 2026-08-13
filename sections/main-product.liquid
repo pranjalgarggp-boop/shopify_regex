@@ -1,72 +1,267 @@
-<section class="mx-auto max-w-7xl px-5 py-8 lg:px-8 lg:py-16">
-  <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+<div class="mx-auto max-w-7xl px-5 lg:px-8 pt-4 sm:pt-6 text-left">
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="text-xs font-mono text-gray-500 mb-4">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li>
+        <a href="{{ routes.all_products_collection_url }}" class="hover:text-[#c44900]">Remedies</a>
+      </li>
+      <li aria-hidden="true">/</li>
+      {% if collection %}
+        <li>
+          <a href="{{ collection.url }}" class="hover:text-[#c44900]">{{ collection.title }}</a>
+        </li>
+        <li aria-hidden="true">/</li>
+      {% endif %}
+      <li aria-current="page" class="font-bold text-[#111315]">
+        {{ product.title }}
+      </li>
+    </ol>
+  </nav>
+
+  <!-- Buy Block (Premium Editorial Layout) -->
+  <div class="grid gap-10 lg:gap-16 lg:grid-cols-12 items-start">
     
-    <!-- Product Images -->
-    <div class="space-y-4">
-      <div class="aspect-[4/5] w-full overflow-hidden rounded-xl bg-gray-100">
-        {% if product.featured_image %}
-          <img
-            src="{{ product.featured_image | img_url: '1000x' }}"
-            alt="{{ product.title }}"
-            class="h-full w-full object-cover object-center"
-          />
+    <!-- Gallery -->
+    <div class="lg:col-span-6 w-full">
+      <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#faf7f1] border border-gray-100 mb-4">
+        {% if product.selected_or_first_available_variant.image %}
+          {% assign featured_image = product.selected_or_first_available_variant.image %}
         {% else %}
-          {{ 'product-1' | placeholder_svg_tag: 'h-full w-full bg-gray-200' }}
+          {% assign featured_image = product.featured_image %}
         {% endif %}
+        
+        <img 
+          src="{{ featured_image | img_url: 'master' }}" 
+          alt="{{ featured_image.alt | escape }}" 
+          class="w-full h-full object-cover"
+          id="MainProductImage"
+        >
+        
+        <!-- Targeted Care Badge -->
+        <div class="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-[10px] sm:text-xs font-bold tracking-widest text-[#111315] shadow-sm backdrop-blur-md">
+          <span class="flex h-1.5 w-1.5 rounded-full bg-[#c44900]"></span>
+          TARGETED CARE
+        </div>
       </div>
+      
+      <!-- Thumbnails -->
+      {% if product.images.size > 1 %}
+        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+          {% for image in product.images %}
+            <button class="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 focus:outline-none focus:border-[#c44900] {% if forloop.first %}border-[#c44900]{% else %}border-transparent{% endif %}" onclick="document.getElementById('MainProductImage').src = '{{ image | img_url: 'master' }}';">
+              <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" class="w-full h-full object-cover">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
-    <!-- Product Details -->
-    <div class="flex flex-col">
-      <h1 class="font-serif text-3xl font-bold tracking-tight text-[#111315] sm:text-4xl">
-        {{ product.title }}
-      </h1>
-      
-      <div class="mt-4 flex items-center gap-2">
-        <span class="text-2xl font-bold tabular-nums tracking-tight text-[#c44900]">
-          {{ product.price | money }}
+    <!-- Details -->
+    <div class="lg:col-span-6 space-y-6 lg:pt-4">
+      <div>
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span class="font-mono text-xs text-[#c44900] font-bold uppercase tracking-widest">
+            {{ section.settings.concern_label | default: 'Healthcare' }}
+          </span>
+          <span class="font-serif text-base font-bold text-[#c44900] px-3 py-0.5 rounded-full border border-gray-200">
+            {{ section.settings.devanagari_name | default: 'आयुर्वेद' }}
+          </span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-[#111315] leading-[1.1]">{{ product.title }}</h1>
+        <p class="text-base sm:text-lg text-gray-600 font-sans mt-3">
+          {{ section.settings.tagline | default: 'Classical Ayurvedic Formulation' }}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 border-y border-gray-100 py-4">
+        <div class="flex items-center gap-1 text-[#c44900]">
+          {% for i in (1..5) %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          {% endfor %}
+          <span class="text-sm font-bold ml-1 text-[#111315]">4.9 (120 Reviews)</span>
+        </div>
+        <span class="text-gray-300">•</span>
+        <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-bold text-blue-700 ring-1 ring-inset ring-blue-700/10">
+          General Wellness
         </span>
+        <span class="text-gray-300">•</span>
+        <span class="text-xs font-mono font-bold text-gray-600 uppercase">≈ 30 Days Pack</span>
       </div>
 
-      <div class="prose prose-sm mt-6 max-w-none text-gray-600">
-        {{ product.description }}
-      </div>
+      <!-- Price Box -->
+      <div class="pt-2">
+        <div class="flex items-baseline gap-4 mb-2">
+          <span class="font-sans text-3xl font-medium text-[#111315]">{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="font-sans text-lg text-gray-400 line-through">
+              {{ product.compare_at_price | money }}
+            </span>
+          {% endif %}
+        </div>
+        <p class="text-sm text-gray-500 font-sans mb-6">
+          Inclusive of all taxes
+        </p>
 
-      <!-- Add to Cart Form -->
-      <div class="mt-10">
-        {% form 'product', product, class: 'form' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          
-          <div class="flex items-center gap-4 mb-6">
-            <div class="flex h-12 w-32 items-center justify-between rounded border border-gray-300 px-4">
-              <button type="button" class="text-gray-500 hover:text-black" onclick="this.nextElementSibling.stepDown()">-</button>
-              <input type="number" name="quantity" value="1" min="1" class="w-12 text-center text-sm font-bold bg-transparent border-none outline-none appearance-none" />
-              <button type="button" class="text-gray-500 hover:text-black" onclick="this.previousElementSibling.stepUp()">+</button>
+        <!-- Form -->
+        <div class="mt-4">
+          {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <div class="flex h-[3.25rem] w-full sm:w-32 items-center justify-between rounded bg-white border border-gray-300 px-4">
+                <button type="button" class="text-gray-500 hover:text-black" onclick="this.nextElementSibling.stepDown()">-</button>
+                <input type="number" name="quantity" value="1" min="1" class="w-12 text-center text-sm font-bold bg-transparent border-none outline-none appearance-none" />
+                <button type="button" class="text-gray-500 hover:text-black" onclick="this.previousElementSibling.stepUp()">+</button>
+              </div>
+              <button
+                type="submit"
+                name="add"
+                class="flex h-[3.25rem] flex-1 items-center justify-center rounded bg-[#111315] px-8 text-sm font-bold text-white transition-colors hover:bg-[#c44900] shadow-md shadow-[#111315]/20"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                {% if product.available %}
+                  Add to Cart
+                {% else %}
+                  Out of Stock
+                {% endif %}
+              </button>
             </div>
-          </div>
-
-          <button
-            type="submit"
-            name="add"
-            class="flex w-full items-center justify-center rounded bg-[#111315] px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-[#c44900]"
-            {% unless product.available %}disabled{% endunless %}
-          >
-            {% if product.available %}
-              Add to Cart
-            {% else %}
-              Out of Stock
-            {% endif %}
-          </button>
-        {% endform %}
+          {% endform %}
+        </div>
       </div>
-      
+
+      <!-- Trust Badges -->
+      <div class="space-y-3 text-xs font-mono text-gray-500 pt-6 border-t border-gray-100">
+        <p class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315]"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+          <span>Dispatched within 24 hours. Express Delivery 2-4 Days.</span>
+        </p>
+        <p class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#111315]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+          <span>AYUSH Licensed & Schedule T Certified Manufacturing</span>
+        </p>
+      </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Sticky Section Bar -->
+<nav aria-label="Sections of this page" class="sticky top-[72px] sm:top-[88px] z-30 mt-8 border-y border-gray-200 bg-white/95 backdrop-blur-md shadow-xs">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8 flex gap-6 overflow-x-auto py-3 no-scrollbar text-xs sm:text-sm font-bold">
+    <a href="#overview" class="shrink-0 text-[#111315] hover:text-[#c44900] transition-colors">Overview</a>
+    <a href="#composition" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Composition</a>
+    <a href="#how-to-take" class="shrink-0 text-gray-600 hover:text-[#c44900] transition-colors">Dosage & Usage</a>
+  </div>
+</nav>
+
+<div class="mx-auto max-w-7xl px-5 lg:px-8 text-left space-y-12 sm:space-y-16 py-10 sm:py-14">
+  
+  <!-- Overview -->
+  <section id="overview" class="scroll-mt-32">
+    <div class="max-w-2xl mb-6">
+      <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Overview</p>
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-2">Product Description</h2>
+    </div>
+    <div class="prose prose-sm sm:prose-base max-w-none text-gray-600 prose-headings:font-serif prose-headings:text-[#111315]">
+      {{ product.description }}
+    </div>
+  </section>
+
+  <!-- Blocks injected for Formulation/Dosage -->
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'composition' %}
+        <section id="composition" class="scroll-mt-32" {{ block.shopify_attributes }}>
+          <div class="mb-4">
+            <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Formulation Breakdown</p>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-2">{{ block.settings.title }}</h2>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-4 sm:p-5 shadow-xs">
+            <div class="prose prose-sm max-w-none">
+              {{ block.settings.table_content }}
+            </div>
+          </div>
+        </section>
+
+      {% when 'dosage' %}
+        <section id="how-to-take" class="scroll-mt-32" {{ block.shopify_attributes }}>
+          <div class="mb-4">
+            <p class="font-mono text-xs font-bold text-[#c44900] tracking-widest uppercase">Dosage & Usage</p>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#111315] mt-2">How to take {{ product.title }}</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+            <div class="bg-[#faf7f1] p-5 rounded-xl border border-gray-200">
+              <h3 class="font-serif text-lg font-bold text-[#111315] mb-3">{{ block.settings.primary_instruction }}</h3>
+              <p class="text-sm text-gray-600">{{ block.settings.secondary_instruction }}</p>
+            </div>
+          </div>
+        </section>
+    {% endcase %}
+  {% endfor %}
+
+</div>
 
 {% schema %}
 {
   "name": "Product Information",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Product Tagline",
+      "default": "Classical Ayurvedic Formulation"
+    },
+    {
+      "type": "text",
+      "id": "devanagari_name",
+      "label": "Devanagari Name",
+      "default": "आयुर्वेद"
+    },
+    {
+      "type": "text",
+      "id": "concern_label",
+      "label": "Concern Label",
+      "default": "Wellness"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "composition",
+      "name": "Composition Table",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Active Botanical Formula"
+        },
+        {
+          "type": "richtext",
+          "id": "table_content",
+          "label": "Ingredients Information",
+          "default": "<p>List ingredients here or use a table.</p>"
+        }
+      ]
+    },
+    {
+      "type": "dosage",
+      "name": "Dosage Instructions",
+      "settings": [
+        {
+          "type": "text",
+          "id": "primary_instruction",
+          "label": "Primary Instruction",
+          "default": "2 Capsules, Twice Daily"
+        },
+        {
+          "type": "textarea",
+          "id": "secondary_instruction",
+          "label": "Details",
+          "default": "Take with warm water after meals."
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
