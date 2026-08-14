@@ -1,63 +1,63 @@
-<section class="bg-[#faf9f5] border-b border-gray-200">
-  <div class="mx-auto flex max-w-7xl flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-10 px-4 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-20">
+<section class="bg-[#faf9f5] border-b border-gray-200 overflow-hidden">
+  <div class="mx-auto flex max-w-7xl flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
     
-    <!-- Text Content -->
-    <div class="w-full lg:w-5/12 space-y-6 text-center lg:text-left">
-      <div class="space-y-4">
-        <span class="font-mono text-xs sm:text-sm font-bold tracking-[0.2em] text-[#c44900] uppercase">
-          {{ section.settings.kicker }}
+    <!-- Left Text Content (On Mobile: Under the 5 bottles) -->
+    <div class="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+      <div class="space-y-3">
+        <span class="font-mono text-xs sm:text-sm font-bold tracking-[0.2em] text-[#c44900] uppercase block">
+          {{ section.settings.kicker | default: "The Science of Ayurveda" }}
         </span>
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-[#111315]">
-          {{ section.settings.heading }}
+        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl leading-[1.15] text-[#111315] font-bold">
+          {{ section.settings.heading | default: "Natural Remedies for a Better You" }}
         </h1>
-        <p class="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-          {{ section.settings.text }}
+        <p class="text-xs sm:text-base text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0 font-sans">
+          {{ section.settings.text | default: "Classical, lab-tested botanical formulations manufactured in our Schedule T GMP certified facility. 100% transparent ingredients, zero heavy metals." }}
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start pt-2">
-        <a href="{{ section.settings.button_link }}" class="w-full sm:w-auto bg-[#111315] text-white hover:bg-[#c44900] hover:text-white px-8 py-3.5 font-sans font-medium tracking-wide text-sm transition-colors border border-transparent text-center">
-          {{ section.settings.button_label }}
+      <!-- Action Buttons (Clean & Separated) -->
+      <div class="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start pt-2">
+        <a href="#catalogue" class="w-full sm:w-auto bg-[#111315] text-white hover:bg-[#c44900] hover:text-white px-8 py-3.5 font-sans font-bold tracking-wide text-xs sm:text-sm transition-colors text-center shadow-sm">
+          {{ section.settings.button_label | default: "Explore Formulations" }}
         </a>
-        <a href="https://wa.me/918360053594" target="_blank" rel="noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[#111315] hover:text-[#c44900] hover:border-[#c44900] bg-transparent border border-[#111315] px-8 py-3.5 font-sans font-medium text-sm transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-current"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+        <a href="https://wa.me/918360053594" target="_blank" rel="noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[#111315] hover:text-[#c44900] hover:border-[#c44900] bg-white border border-[#111315] px-8 py-3.5 font-sans font-bold text-xs sm:text-sm transition-colors shadow-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-[#25D366]"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           <span>Consult Our Experts</span>
         </a>
       </div>
+    </div>
 
-      <!-- Trust Badges -->
-      <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-6 border-t border-gray-200 mt-8">
-        <div class="flex flex-col items-center lg:items-start gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#25D366]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          <span class="text-[10px] sm:text-xs font-bold text-gray-700 uppercase tracking-wide text-center lg:text-left">Lab Tested<br />Purity</span>
+    <!-- Right Content: 5-Bottle Lineup Banner (Sits at top on mobile) -->
+    <div class="w-full lg:w-1/2 flex flex-col items-center justify-center">
+      <div class="relative w-full max-w-md lg:max-w-lg bg-[#faf9f5] p-2 flex flex-col items-center">
+        <!-- 5 Bottles Lineup Grid -->
+        <div class="flex items-end justify-center gap-1.5 sm:gap-2.5 w-full pb-4">
+          <div class="w-1/5 flex justify-center">
+            <img src="{{ 'product-shilajit.jpg' | asset_url }}" alt="Gasogex" class="w-full max-w-[70px] h-auto object-contain drop-shadow-md transition-transform hover:scale-105" />
+          </div>
+          <div class="w-1/5 flex justify-center mb-1">
+            <img src="{{ 'product-ashwagandha.jpg' | asset_url }}" alt="Kabzraj" class="w-full max-w-[70px] h-auto object-contain drop-shadow-md transition-transform hover:scale-105" />
+          </div>
+          <div class="w-1/5 flex justify-center mb-2">
+            <img src="{{ 'product-probiotics.jpg' | asset_url }}" alt="Livgex" class="w-full max-w-[75px] h-auto object-contain drop-shadow-md transition-transform hover:scale-105" />
+          </div>
+          <div class="w-1/5 flex justify-center mb-1">
+            <img src="{{ 'product-curcumin.jpg' | asset_url }}" alt="Pilegex" class="w-full max-w-[70px] h-auto object-contain drop-shadow-md transition-transform hover:scale-105" />
+          </div>
+          <div class="w-1/5 flex justify-center">
+            <img src="{{ 'product-ashwagandha.jpg' | asset_url }}" alt="Lucogex" class="w-full max-w-[70px] h-auto object-contain drop-shadow-md transition-transform hover:scale-105" />
+          </div>
         </div>
-        <div class="flex flex-col items-center lg:items-start gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#c44900]"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-          <span class="text-[10px] sm:text-xs font-bold text-gray-700 uppercase tracking-wide text-center lg:text-left">GMP<br />Certified</span>
-        </div>
-        <div class="flex flex-col items-center lg:items-start gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          <span class="text-[10px] sm:text-xs font-bold text-gray-700 uppercase tracking-wide text-center lg:text-left">Ayush<br />Approved</span>
+
+        <!-- Lineup Label -->
+        <div class="border-t border-gray-200/80 pt-3 w-full text-center">
+          <p class="font-mono text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">
+            THE COMPLETE RANGE · FIVE CLASSICAL FORMULATIONS
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- Image Content -->
-    <div class="w-full lg:w-7/12 relative rounded-sm overflow-hidden shadow-sm bg-white p-1 border border-gray-100">
-      {% if section.settings.image != blank %}
-        <img
-          src="{{ section.settings.image | img_url: 'master' }}"
-          alt="Ayurvedic herbs and formulations"
-          class="w-full h-auto object-contain block"
-        />
-      {% else %}
-        <img
-          src="{{ 'banner-natural-remedies.jpg' | asset_url }}"
-          alt="Regex Remedies Hero"
-          class="w-full h-auto object-contain block"
-        />
-      {% endif %}
-    </div>
   </div>
 </section>
 
@@ -93,11 +93,6 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Hero Image"
     }
   ],
   "presets": [
